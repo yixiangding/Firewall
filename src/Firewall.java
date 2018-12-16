@@ -3,8 +3,10 @@ import java.io.File;
 import java.io.FileReader;
 
 public class Firewall implements FirewallDefinition {
+    private PolicyManager policyManager;
 
     Firewall(String pathToPolicies) {
+        this.policyManager = new PolicyManager();
         parsePolicies(pathToPolicies);
     }
 
@@ -28,7 +30,8 @@ public class Firewall implements FirewallDefinition {
     }
 
     private void storePolicy(String direction, String protocol, String portRange, String ipRange) {
-        // TODO: implement policies
+        Policy newPolicy = new Policy(direction, protocol, portRange, ipRange);
+        policyManager.addPolicy(newPolicy);
     }
 
     @Override
