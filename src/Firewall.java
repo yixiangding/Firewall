@@ -3,10 +3,10 @@ import java.io.File;
 import java.io.FileReader;
 
 public class Firewall implements FirewallDefinition {
-    private PolicyManager policyManager;
+    PolicyManager policyManager;
 
     Firewall(String pathToPolicies) {
-        this.policyManager = new PolicyManager();
+        policyManager = new PolicyManager();
         parsePolicies(pathToPolicies);
     }
 
@@ -36,6 +36,6 @@ public class Firewall implements FirewallDefinition {
 
     @Override
     public boolean accept_packet(String direction, String protocol, int port, String ip_address) {
-        return false;
+        return policyManager.willAcceptPacket(direction, protocol, port + "", ip_address);
     }
 }
